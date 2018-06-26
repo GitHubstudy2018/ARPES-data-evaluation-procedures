@@ -31,20 +31,22 @@ endif
 wave outwv = $newname
 SetScale/P x dimst0-EF,dimd0,"E-E\BF\M (eV)", outwv	//scale energy axis to binding energy
 
-klimpz =1.1*0.512*sqrt(EF)*sin(Pi/180*dimst1)
+// define boundaries of resulting k-values
+klimpz =1.1*0.512*sqrt(EF)*sin(Pi/180*dimst1)			//factor "1.1" used in the k-conversion formula is an arbitrary factor to make range of the k-vectors slightly bigger in order to make them the resulting values fit into the scale.
 klimmz =1.1*0.512*sqrt(EF)*sin(Pi/180*(dimst1+dimsiz1*dimd1))
 klimpy =1.1*0.512*sqrt(EF)*sin(Pi/180*dimst2)
 klimmy =1.1*0.512*sqrt(EF)*sin(Pi/180*(dimst2+dimsiz2*dimd2))
 
-SetScale/I y klimpz, klimmz,"k-Vector",  outwv //scale °-axis to k-axis
-SetScale/I z klimpy, klimmy,"k-Vector",  outwv //scale °-axis to k-axis
-For(i=0;i<dimsiz2;i+=1)
-outwv[][][i] = ((180/Pi*asin(y/(0.512*sqrt(x+EF))) >= dimst1) && (180/Pi*asin(y/(0.512*sqrt(x+EF))) <= dimst1+dimsiz1*dimd1)) ? inwv(x+EF)(180/Pi*asin(y/(0.512*sqrt(x+EF)))) : NaN 
-//outwv=inwv(x+EF)(180/Pi*asin(y/(0.512*sqrt(x+EF))))
-endfor
-//For(i=0;j<dimsiz1;j+=1)
-//outwv[][j][] = ((180/Pi*asin(y/(0.512*sqrt(x+EF))) >= dimst2) && (180/Pi*asin(y/(0.512*sqrt(x+EF))) <= dimst2+dimsiz2*dimd2)) ? inwv(x+EF)(180/Pi*asin(y/(0.512*sqrt(x+EF)))) : NaN
-//endfor
+//scale Â°-axis to k-axis
+SetScale/I y klimpz, klimmz,"k-Vector",  outwv
+//scale Â°-axis to k-axis
+SetScale/I z klimpy, klimmy,"k-Vector",  outwv
 
+// final transformation
+// set value only if it falls into boundaries, else set it to NaN
+
+For(i=0;i<dimsiz2;i+=1)
+outwv[][][i] = ((180/Pi*asin(y/(0.512*sqrt(x+EF))) >= dimst1) && (180/Pi*asin(y/(0.512*sqrt(x+EF))) <= dimst1+dimsiz1*dimd1)) ? inwv(x+EF)(180/Pi*asin(y/(0.512*sqrt(x+EF)))) : NaN
+endfor
 
 end
