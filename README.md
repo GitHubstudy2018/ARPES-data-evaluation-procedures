@@ -5,7 +5,7 @@ Just move the .ipf file of your desire to your IGOR Pro user procedures location
 
 See the wiki for additional explanations.
 
-## Explanation of the files
+## Explanation of the procedures
 
 ### degdeg2kk.ipf
 
@@ -25,4 +25,4 @@ Say you scanned the electronic structure of a material for various angles agains
 ```
 deg2kvec3d(inwvname, EF)
 ```
-whereas *inwvname* is the 3d-input wave and *EF* is the kinetic energy value in electronvolts where the Fermi-energy is (which is photon energy hv minus analyzer work function in electron volts). The free electron final state approximation is used in this procedure to transform angles to k-vector and the factor "1.1" used in the k-conversion formula is an arbitrary factor to make range of the k-vectors slightly bigger in order to make them the resulting values fit into the scale.
+whereas *inwvname* is the 3d-input wave and *EF* is the kinetic energy value in electronvolts where the Fermi-energy is (which is photon energy hv minus analyzer work function in electron volts). The free electron final state approximation is used in this procedure to transform angles to k-vector.
