@@ -5,9 +5,9 @@ Just move the .ipf file of your desire to your IGOR Pro user procedures location
 
 See the wiki for additional explanations.
 
-Explanation of the files:
+## Explanation of the files
 
-## degdeg2kk.ipf
+### degdeg2kk.ipf
 
 This procedure turns a Fermi Surface Map that is represented as a 3-dimensional wave (x = Binding Energy, y = tilt angle, z = polar angle) into a 2-dimensional Fermi Surface Map with the common representation of k_x wave vector over k_y wave vector (both in inverse Angstroms). The function you have to use is 
 
@@ -18,7 +18,7 @@ whereas *inwvname* is your 3-dimensional input wave, *targetE* is your target en
 
 The output wave / k_x,k_y-Fermi surface will appear in the same folder as your input wave and will be named as "kk<targetE>". The free electron final state approximation is used in this procedure.
 
-## deg2kvec3d.ipf
+### deg2kvec3d.ipf
 
 Say you scanned the electronic structure of a material for various angles against the analyzer slit - resulting in multiple scans represented by x = E_kinetic and y = polar angle, that are stacked along the z = tilt -increment axis. You have a 3-dimensional wave with (x = E_kin , y= polar angle, z = tilt angle). This procedure accepts just that as input and transforms it into a (x = E_B , y= k_x, z = k_y)-representation. Invoke it with
 
