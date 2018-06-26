@@ -7,6 +7,8 @@
 #pragma rtGlobals=1		// Use modern global access method.
 
 function deg2kvec3d(inwvname, EF)
+
+// variable definitions
 string inwvname
 variable EF
 string newname
@@ -15,9 +17,11 @@ variable dimst1, dimd1,dimsiz1
 variable dimst2, dimd2,dimsiz2
 variable klimpz, klimmz, abslen,i,j, klimmy, klimpy
 
+// string definition for output wave
 newname = inwvname + "Ek3d"
 wave inwv = $inwvname
 
+// define wave's boundary variables
 dimst0 = dimoffset(inwv, 0); dimd0 =  dimdelta(inwv, 0); dimsiz0=dimSize(inwv,0);
 dimst1 = dimoffset(inwv, 1); dimd1 =  dimdelta(inwv, 1);dimsiz1=dimSize(inwv,1);
 dimst2 = dimoffset(inwv, 2); dimd2 =  dimdelta(inwv, 2);dimsiz2=dimSize(inwv,2);
@@ -29,9 +33,11 @@ if (exists(newname) == 0)
 endif
 
 wave outwv = $newname
+
+// transform energy axis from kinetic to binding energy
 SetScale/P x dimst0-EF,dimd0,"E-E\BF\M (eV)", outwv	//scale energy axis to binding energy
 
-// define boundaries of resulting k-values
+// define boundaries of resulting k-values using electron final state approx.
 klimpz =1.1*0.512*sqrt(EF)*sin(Pi/180*dimst1)			//factor "1.1" used in the k-conversion formula is an arbitrary factor to make range of the k-vectors slightly bigger in order to make them the resulting values fit into the scale.
 klimmz =1.1*0.512*sqrt(EF)*sin(Pi/180*(dimst1+dimsiz1*dimd1))
 klimpy =1.1*0.512*sqrt(EF)*sin(Pi/180*dimst2)
